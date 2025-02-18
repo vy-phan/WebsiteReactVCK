@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuthContext } from '../../context/AuthContext';
 import CourseRatingForm from '../../components/course/CourseRatingForm';
 import useGetUsers from '../../hooks/useGetUsers';
-import Meta from '../../components/meta';
+import Meta from '../../components/Meta.jsx';
 
 const Courses = () => {
   const { t } = useTranslation();

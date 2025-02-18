@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Meta from "../../components/meta";
+import Meta from '../../components/Meta.jsx';
 
 const About = () => {
   const { t } = useTranslation();

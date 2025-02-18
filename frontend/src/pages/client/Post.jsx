@@ -6,7 +6,7 @@ import useCRUDPost from '../../hooks/useCRUDPost';
 import { useAuthContext } from '../../context/AuthContext';
 import useGetUsers from '../../hooks/useGetUsers';
 import { marked } from "marked";
-import Meta from '../../components/meta';
+import Meta from '../../components/Meta.jsx';
 
 const Post = () => {
   const { t } = useTranslation();

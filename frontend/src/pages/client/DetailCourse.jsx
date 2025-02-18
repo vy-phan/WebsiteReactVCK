@@ -17,8 +17,8 @@ import CourseTabs from "../../components/course/CourseTabs.jsx";
 import CourseSidebar from "../../components/course/CourseSidebar.jsx";
 import ChatbotWidget from "../../components/course/ChatbotWidget.jsx";
 import { AuthContext } from "../../context/AuthContext"; // <--- Import AuthContext
-import Meta from "../../components/meta.jsx";
 import { useTranslation } from "react-i18next";
+import Meta from "../../components/Meta.jsx";
 
 const DetailCourse = () => {
   const { t } = useTranslation();

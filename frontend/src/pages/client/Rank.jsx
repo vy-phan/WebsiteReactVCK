@@ -7,7 +7,7 @@ import useGetUsers from "../../hooks/useGetUsers";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from 'react-i18next';
 import { useAuthContext } from "../../context/AuthContext";
-import Meta from "../../components/meta";
+import Meta from '../../components/Meta.jsx';
 
 const Rank = () => {
   const { progress, loading: progressLoading } = useGetProgress();

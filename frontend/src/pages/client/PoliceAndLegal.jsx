@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import Meta from '../../components/meta';
+import Meta from '../../components/Meta.jsx';
 
 const PoliceAndLegal = () => {
   const { t } = useTranslation();

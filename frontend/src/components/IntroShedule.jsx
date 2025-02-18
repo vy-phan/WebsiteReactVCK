@@ -8,7 +8,8 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Meta from './meta';
+import Meta from './Meta';
+
 
 const IntroSchedule = ({ handleShowCalendar }) => {
   const { t } = useTranslation();

@@ -12,7 +12,7 @@ import Statistical from "../../components/Statistical";
 import ProcessDiagram from "../../components/ProcessDiagram";
 import CertificateModal from '../../components/profile/CertificateModal';
 import ProfileSettings from "../../components/profile/ProfileSettings";
-import Meta from "../../components/meta";
+import Meta from '../../components/Meta.jsx';
 
 const Profile = () => {
   const { t } = useTranslation();

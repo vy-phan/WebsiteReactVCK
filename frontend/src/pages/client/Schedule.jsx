@@ -6,7 +6,7 @@ import useCRUD_Schedule from '../../hooks/useCRUD_Schedule';
 import { useAuthContext } from '../../context/AuthContext';
 import useGetAllLessons from '../../hooks/useGetAllLessson';
 import useGetProgress from '../../hooks/useGetProgress';
-import Meta from '../../components/meta';
+import Meta from '../../components/Meta.jsx';
 
 const MonthlySchedule = () => {
   const { t } = useTranslation();

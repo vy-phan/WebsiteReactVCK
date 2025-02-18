@@ -7,7 +7,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { useTheme } from '../../context/ThemeContext';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useTranslation } from 'react-i18next';
-import Meta from '../../components/meta';
+import Meta from '../../components/Meta.jsx';
 
 
 // Lazy load các components không cần thiết ngay lập tức
