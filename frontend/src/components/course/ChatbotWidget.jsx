@@ -15,7 +15,7 @@ const ChatbotWidget = ({ isMobileMenuOpen, isChatbotOpen, setIsChatbotOpen }) =>
           <FaTimes size={24} lg:size={28} />
         ) : (
           <img
-            src="../public/chatbot.jpg"
+            src="/chatbot.jpg"
             alt="Chatbot Avatar"
             className="absolute top-0 left-0 w-full h-full rounded-full object-cover"
           />
@@ -32,7 +32,7 @@ const ChatbotWidget = ({ isMobileMenuOpen, isChatbotOpen, setIsChatbotOpen }) =>
             <div className="flex items-center space-x-3">
               <div className="relative w-12 h-12">
                 <img
-                  src="../public/chatbot.jpg"
+                  src="/chatbot.jpg"
                   className="w-full h-full rounded-full object-cover ring-2 ring-white dark:ring-gray-700"
                   alt="CoNan Avatar"
                 />

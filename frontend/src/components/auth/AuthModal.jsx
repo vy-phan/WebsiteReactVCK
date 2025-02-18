@@ -105,7 +105,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "login" }) => {
                   </div>
 
                   <motion.div
-                    style={{ opacity: dragOpacity, scale: dragScale }}
+                    // style={{ opacity: dragOpacity, scale: dragScale }}
                     className="sticky top-8 h-full flex flex-col justify-center items-center text-white"
                   >
                     <h2 className="text-3xl font-bold mb-4">{t("welcome")}</h2>
