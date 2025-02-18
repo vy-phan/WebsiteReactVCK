@@ -1,0 +1,27 @@
+/* Dark mode styles */
+:root {
+  --background-light: #ffffff;
+  --text-light: #000000;
+  --background-dark: #1a1a1a;
+  --text-dark: #ffffff;
+}
+
+/* Light mode (default) */
+body {
+  background-color: var(--background-light);
+  color: var(--text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode */
+body.dark {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Smooth transitions for dark mode changes */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
