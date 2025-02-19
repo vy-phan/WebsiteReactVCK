@@ -79,7 +79,7 @@ function App() {
               />
 
               {/* Admin and Creator */}
-              {authUser?.role === 'creator' || authUser?.role === 'admin' || true ?
+              {authUser?.role === 'creator' || authUser?.role === 'admin'  ?
                 (
                   <Route path="/admin" element={
                     <ProtectedRoute authUser={authUser}>
