@@ -9,11 +9,11 @@ import { AuthContext } from "../../context/AuthContext";
 const ChatBot = () => {
   const [user, setUser] = useState(null);
   const [userInput, setUserInput] = useState("");
+  const { authUser } = useContext(AuthContext);
   const [chatHistory, setChatHistory] = useState(() => {
-    const storedHistory = localStorage.getItem("chat-history");
+    const storedHistory = localStorage.getItem(`chat-history-${authUser?._id}`);
     return storedHistory ? JSON.parse(storedHistory) : [];
   });
-  const { authUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLesson, setCurrentLesson] = useState(null);
   const [showIntroMessage, setShowIntroMessage] = useState(() => {

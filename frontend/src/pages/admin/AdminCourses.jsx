@@ -199,7 +199,7 @@ const AdminCourses = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                        {course.author ? users.find((user) => user._id === course?.author)?.username : 'N/A'}
+                        {course.author ? users?.find((user) => user._id === course?.author)?.username : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
