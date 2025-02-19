@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react"; // Import useCallback và useMemo
 import toast from "react-hot-toast";
 import { useTranslation } from 'react-i18next';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 // Tạo context cho việc quản lý xác thực
 export const AuthContext = createContext();
@@ -29,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const fetchCurrentUser = useMemo(() => {
         return async (abortController) => {
-            console.log("🔄 Bé AuthContext: Dạ anh ơi! Đợi bé kiểm tra thông tin anh cái (ಥ _ ಥ)");
+            // console.log("🔄 Bé AuthContext: Dạ anh ơi! Đợi bé kiểm tra thông tin anh cái (ಥ _ ಥ)");
             setLoading(true);
 
             try {
@@ -42,20 +41,19 @@ export const AuthContextProvider = ({ children }) => {
                 const data = res.data;
 
                 if (res.status === 200 && data.success) {
-                    console.log(`✅ Bé AuthContext: A! Bé đã thấy thông tin của anh ${data.message.username} rồi! (＞﹏＜)`, {
-                        "Chào anh": data.message.username,
-                        "id anh là": data.message._id
-                    });
+                    // console.log(`✅ Bé AuthContext: A! Bé đã thấy thông tin của anh ${data.message.username} rồi! (＞﹏＜)`, {
+                    //     "Chào anh": data.message.username,
+                    //     "id anh là": data.message._id
+                    // });
                     setAuthUser(data.message);
                     setIsAuthenticated(true);
                 } else {
-                    console.log("❌ API trả về lỗi - Xóa thông tin user");
+                    // console.log("❌ API trả về lỗi - Xóa thông tin user");
                     setIsAuthenticated(false);
                     setAuthUser(null);
                 }
             } catch (error) {
                 if (!isMounted) return;
-
                 console.error("❌ Bé AuthContext: Dạ anh ơi! Đăng nhập đi mà (┬┬﹏┬┬), lỗi: ", error.message);
                 setIsAuthenticated(false);
                 setAuthUser(null);
