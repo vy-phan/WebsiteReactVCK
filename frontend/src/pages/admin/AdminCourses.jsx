@@ -24,7 +24,7 @@ const AdminCourses = () => {
     imageCourse: '',
   });
 
-  const courseByCreator = courses.filter(course => course.author === authUser?._id)
+  const courseByCreator = courses.filter(course => course?.author === authUser?._id)
 
 
   const handleDelete = async (courseId) => {
@@ -177,7 +177,7 @@ const AdminCourses = () => {
               )
                 : (
                   // hiển khóa học của đúng tác giả đó
-                  courseByCreator.map((course) => (
+                  courseByCreator?.map((course) => (
                     <tr key={course._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -199,7 +199,7 @@ const AdminCourses = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                        {course.author ? users.find((user) => user._id === course.author)?.username : 'N/A'}
+                        {course.author ? users.find((user) => user._id === course?.author)?.username : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button

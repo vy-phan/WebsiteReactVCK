@@ -23,6 +23,7 @@ const AdminPost = () => {
     const { authUser } = useAuthContext();
     const { users } = useGetUsers();
     const isAdmin = authUser?.role === 'admin';
+    const isCreator = authUser?.role === 'creator'; // Assuming 'creator' is the role for regular users who can post
 
     useEffect(() => {
         if (!isModalOpen) {
@@ -90,6 +91,11 @@ const AdminPost = () => {
     if (loading) return <Loading loading={loading} />;
     if (error) return <Error error={error} />;
 
+    // Filter posts for creator role
+    const filteredPosts = isCreator
+        ? posts?.filter(post => post.author === authUser?._id)
+        : posts;
+
     return (
         <div className="p-6">
             <div className="flex justify-between items-center mb-6">
@@ -100,7 +106,7 @@ const AdminPost = () => {
                     <p className="text-gray-600 dark:text-gray-400">
                         {t('adminPost_totalPosts')}:
                         <span className="ml-2 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">
-                            {posts?.length || 0} {t('adminPost_postsSuffix')}
+                            {filteredPosts?.length || 0} {t('adminPost_postsSuffix')}
                         </span>
                     </p>
                 </div>
@@ -145,7 +151,7 @@ const AdminPost = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        {posts?.map((post, index) => (
+                        {filteredPosts?.map((post, index) => (
                             <tr key={post._id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                     {index + 1}
