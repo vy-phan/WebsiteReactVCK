@@ -279,7 +279,7 @@ const NoteLesson = ({ courseId, lessonId, userData }) => {
                                                 setEditingNote(note._id);
                                                 setEditContent(note.content);
                                             }}
-                                            className="p-2 text-blue-600 hover:text-blue-800 
+                                            className="p-2 text-blue-600 bg-gray-200 dark:bg-dark  hover:text-blue-800 
                                                     transition duration-200 ease-in-out"
                                             disabled={isLoading}
                                             title={t('edit')}
@@ -288,7 +288,7 @@ const NoteLesson = ({ courseId, lessonId, userData }) => {
                                         </button>
                                         <button
                                             onClick={() => handleDeleteNote(note._id)}
-                                            className="p-2 text-red-600 hover:text-red-800
+                                            className="p-2 text-red-600 bg-gray-200 dark:bg-dark hover:text-red-800
                                                     transition duration-200 ease-in-out"
                                             disabled={isLoading}
                                             title={t('delete')}

@@ -608,19 +608,19 @@ export const resetPassword = async (req, res) => {
 
 
 export const getCurrentUser = async (req, res) => {
-  console.log("getCurrentUser controller - Bắt đầu thực thi..."); // <---- LOG 1: BẮT ĐẦU CONTROLLER
+  // console.log("getCurrentUser controller - Bắt đầu thực thi..."); // <---- LOG 1: BẮT ĐẦU CONTROLLER
 
   try {
-    console.log("getCurrentUser controller - Kiểm tra req.user:", req.user); // <---- LOG 2: KIỂM TRA req.user
+    // console.log("getCurrentUser controller - Kiểm tra req.user:", req.user); // <---- LOG 2: KIỂM TRA req.user
 
     if (!req.user) { // Middleware protectRoute đã set req.user nếu JWT hợp lệ
-      console.log("getCurrentUser controller - req.user không tồn tại. Trả về 401 Unauthorized."); // <---- LOG 3: req.user KHÔNG TỒN TẠI
+      // console.log("getCurrentUser controller - req.user không tồn tại. Trả về 401 Unauthorized."); // <---- LOG 3: req.user KHÔNG TỒN TẠI
       return res.status(401).json({ success: false, message: 'Unauthorized' }); // Không có req.user => JWT không hợp lệ
     }
 
     // Vì req.user đã chứa thông tin user đầy đủ, không cần query lại database
     const user = req.user;
-    console.log("getCurrentUser controller - Thông tin user từ req.user:", user); // <---- LOG 4: THÔNG TIN USER TỪ req.user
+    // console.log("getCurrentUser controller - Thông tin user từ req.user:", user); // <---- LOG 4: THÔNG TIN USER TỪ req.user
 
     const responseData = { // Tạo object response data rõ ràng
       success: true,
@@ -633,18 +633,18 @@ export const getCurrentUser = async (req, res) => {
         role: user.role,
       },
     };
-    console.log("getCurrentUser controller - Chuẩn bị gửi JSON response:", responseData); // <---- LOG 5: TRƯỚC KHI GỬI JSON
+    // console.log("getCurrentUser controller - Chuẩn bị gửi JSON response:", responseData); // <---- LOG 5: TRƯỚC KHI GỬI JSON
 
     // Trả về thông tin user (KHÔNG bao gồm password) trong response body
     res.status(200).json(responseData); // Sử dụng responseData đã tạo
 
-    console.log("getCurrentUser controller - Gửi JSON response thành công."); // <---- LOG 6: SAU KHI GỬI JSON (THÀNH CÔNG)
+    // console.log("getCurrentUser controller - Gửi JSON response thành công."); // <---- LOG 6: SAU KHI GỬI JSON (THÀNH CÔNG)
 
   } catch (error) {
     console.error("getCurrentUser controller - Lỗi trong catch block:", error); // <---- LOG 7: LỖI TRONG CATCH BLOCK
     res.status(500).json({ success: false, message: "Server Error" });
-    console.log("getCurrentUser controller - Gửi JSON lỗi 500."); // <---- LOG 8: SAU KHI GỬI JSON LỖI 500
+    // console.log("getCurrentUser controller - Gửi JSON lỗi 500."); // <---- LOG 8: SAU KHI GỬI JSON LỖI 500
   }
 
-  console.log("getCurrentUser controller - Kết thúc thực thi."); // <---- LOG 9: KẾT THÚC CONTROLLER
+  // console.log("getCurrentUser controller - Kết thúc thực thi."); // <---- LOG 9: KẾT THÚC CONTROLLER
 };

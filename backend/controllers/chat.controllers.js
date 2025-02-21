@@ -13,17 +13,17 @@ let vectorStore;
 
 const cleanVietnameseText = (text) => {
     return text
-      .replace(/Dĩ nhiên rằng|Hình dung rằng là|à|ừm/g, '') // Loại filler words
-      .replace(/\s+/g, ' ') // Chuẩn hóa khoảng trắng
+      .replace(/Dĩ nhiên rằng|Hình dung rằng là|à|ừm/g, '') 
+      .replace(/\s+/g, ' ') 
       .trim();
   };
   
   // Chunking theo tokens (phù hợp tiếng Việt)
   const createTextSplitter = () => 
     new RecursiveCharacterTextSplitter({
-      chunkSize: 500, // ~500 tokens (~375-400 từ tiếng Việt)
-      chunkOverlap: 50, // Giữ ngữ cảnh
-      separators: ['\n\n', '\n', '. ', '! ', '? '], // Ưu tiên ngắt câu tự nhiên
+      chunkSize: 500, 
+      chunkOverlap: 50, 
+      separators: ['\n\n', '\n', '. ', '! ', '? '], 
     });
 
 export const initializeChatbotComponents = async () => {
@@ -58,20 +58,20 @@ export const initializeChatbotComponents = async () => {
 export const indexLessonDataWithLangchain = async (lesson, embeddings, pineconeIndex) => {
     if (!lesson?._id || !lesson.summary || !lesson.transcript) return;
   
-    // Bước 1: Làm sạch dữ liệu
+
     const cleanedSummary = cleanVietnameseText(lesson.summary);
     const cleanedTranscript = cleanVietnameseText(lesson.transcript);
   
-    // Bước 2: Chunking cả summary và transcript
+
     const textSplitter = createTextSplitter();
     
-    // Chia transcript thành chunks (quan trọng)
+
     const transcriptChunks = await textSplitter.splitText(cleanedTranscript);
     
-    // Chia summary thành chunks (nếu cần)
+
     const summaryChunks = await textSplitter.splitText(cleanedSummary);
   
-    // Bước 3: Kết hợp chunks và metadata
+
     const allChunks = [...transcriptChunks, ...summaryChunks];
     const docs = allChunks.map((chunk, index) => 
       new Document({
@@ -83,16 +83,16 @@ export const indexLessonDataWithLangchain = async (lesson, embeddings, pineconeI
       })
     );
   
-    // Bước 4: Index vào Pinecone
+
     try {
       await PineconeStore.fromDocuments(docs, embeddings, { 
         pineconeIndex,
-        namespace: 'lessons', // Tách namespace cho rõ ràng
+        namespace: 'lessons', 
       });
       console.log(`✅ Đã index ${docs.length} chunks của bài ${lesson._id} (Model: ${embeddings.modelName})`);
     } catch (error) {
       console.error("❌ Lỗi index:", error);
-      throw new Error("Index failed: " + error.message); // Propagate error
+      throw new Error("Index failed: " + error.message);
     }
   };
 
