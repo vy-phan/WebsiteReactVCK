@@ -153,7 +153,7 @@ const Home = () => {
       ? 'bg-gradient-to-br from-gray-900 to-black text-white'
       : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-900'
       } pt-4 sm:pt-6 md:pt-8`}>
-      {/* Nhúng Meta component ở đầu trang Home */}
+      {/* Nhúng Meta component ở đầu trang Home */}      
       <Meta
         title={t('homeMetaTitle')} // Sử dụng translation cho title
         description={t('homeMetaDescription')} // Sử dụng translation cho description
@@ -257,6 +257,7 @@ const Home = () => {
 
         </motion.div>
       </div>
+
 
       <Suspense fallback={<LoadingSpinner />}>
         <ScrollingCards />

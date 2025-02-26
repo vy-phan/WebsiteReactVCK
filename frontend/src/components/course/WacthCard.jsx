@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import useGetAllLessson from "../../hooks/useGetAllLessson.js";
 
+
 const WatchCard = ({ lesson, onLessonComplete, handleLessonSelect }) => {
   const [filteredExercises, setFilteredExercises] = useState([]); // Danh sách bài tập
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0); // Chỉ số câu hỏi đang hiển thị

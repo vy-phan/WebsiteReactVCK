@@ -6,6 +6,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import useGetProgress from '../../hooks/useGetProgress';
 import useGetLessons from '../../hooks/useGetLesson';
 import { useTranslation } from 'react-i18next';
+import TestLastCourse from './TestLastCourse';
 
 const CourseSidebar = ({
   filteredLessons,
@@ -141,7 +142,7 @@ const CourseSidebar = ({
             </ul>
           </div>
         </div>
-        {/* <div className="rounded-lg">
+        <div className="rounded-lg">
           <div
             className="flex items-center justify-between p-4 cursor-pointer"
             onClick={toggleTests}
@@ -150,9 +151,9 @@ const CourseSidebar = ({
             {openTests ? <FaChevronUp /> : <FaChevronDown />}
           </div>
           <div className={`px-4 pb-4 ${openTests ? "block" : "hidden"}`}>
-            <p>{t('courseSidebarTestContent')}</p>
+              <TestLastCourse filteredLessons={filteredLessons}/>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Mobile slide-out menu */}

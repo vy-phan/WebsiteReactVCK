@@ -12,6 +12,7 @@ import noteRouter from "./router/note.router.js";
 import postRouter from "./router/post.router.js";
 import scheduleRouter from "./router/schedule.router.js";
 import chatRouter from "./router/chat.router.js";
+import testRouter from "./router/test.router.js"
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
@@ -45,6 +46,7 @@ app.use("/api/notes", noteRouter);
 app.use("/api/post", postRouter);
 app.use("/api/schedule", scheduleRouter);
 app.use("/api/chat/", chatRouter);
+app.use("/api/test/",testRouter)
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
