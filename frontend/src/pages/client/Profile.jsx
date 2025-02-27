@@ -637,6 +637,7 @@ const Profile = () => {
             )}
             {activeTab === "stats" && (
               <div>
+                {/* nút tạo lộ trình */}
                 <Link to="/shedule" className='w-full sm:w-auto text-white'>
                   <button
                     className="relative text-base font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 
@@ -753,10 +754,7 @@ const Profile = () => {
               drawCertificate={drawCertificate}
             />
           )}{" "}
-          {/* Hiển thị showcase ở tab info */}
-          {/* Progress Diagram Section */}
           {activeTab === "stats" && <ProgressDiagram t={t} />}{" "}
-          {/* Hiển thị diagram ở tab stats */}
         </div>
       </div>
       <AvatarModal

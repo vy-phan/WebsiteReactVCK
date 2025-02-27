@@ -211,7 +211,7 @@ const MonthlySchedule = () => {
 
   return (
     <div className="min-h-screen pt-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <Meta
+      <Meta
         title={t("scheduleMetaTitle")} // Sử dụng translation cho title
         description={t("scheduleMetaDescription")} // Sử dụng translation cho description
         keywords={t("scheduleMetaKeywords")} // Sử dụng translation cho keywords
@@ -301,40 +301,71 @@ const MonthlySchedule = () => {
             </div>
 
             {/* Event List */}
-            <div className="mt-8 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {events.map((event) => {
-                // Check if all lessons in this event are completed
-                const allLessonsCompleted = event.lessons.every(lessonId =>
-                  progressUser[0]?.completedLessons.includes(lessonId)
-                );
+            <div className="relative mt-12 ">
+              {/* Gradient overlay for scroll edges */}
+              <div className="absolute left-0 right-0 h-full pointer-events-none z-10">
+                <div className="absolute left-0 w-20 h-full bg-gradient-to-r from-white to-transparent dark:from-gray-800 dark:to-transparent" />
+                <div className="absolute right-0 w-20 h-full bg-gradient-to-l from-white to-transparent dark:from-gray-800 dark:to-transparent" />
+              </div>
 
-                return (
-                  <div
-                    key={event.id}
-                    className="p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-white dark:bg-gray-800/50 backdrop-blur-lg transition-all duration-300 group hover:border-blue-200 dark:hover:border-blue-500/50"
-                  >
-                    <div className="flex flex-col space-y-2"> {/* Use flex-col and space-y-2 for vertical spacing */}
-                      <h3 className={`text-base font-medium text-gray-800 dark:text-white ${allLessonsCompleted ? 'group-hover:text-green-600 dark:group-hover:text-green-400' : 'group-hover:text-blue-600 dark:group-hover:text-blue-400'} group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors`}>
-                        {eventsDataShow[events.indexOf(event)]?.map((lesson) => {
-                          const lessonIndex = lessonByCourse.findIndex(l => l._id === lesson._id);
-                          return `${t('lesson')} ${lessonIndex + 1}: ${lesson?.nameLesson}`;
-                        }).join('\n \n')}
-                      </h3>
-                      <div className="flex items-center justify-between"> {/* Flex container for date and time */}
-                        <span className="text-sm text-gray-600 dark:text-gray-400"> {/* Reduced text size to text-sm */}
-                          {t('time')}: {event.time}
-                        </span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400"> {/* Reduced text size to text-sm */}
-                          {new Date(event.date).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className={`text-sm font-bold ${allLessonsCompleted ? 'text-green-600' : 'text-blue-600'}`}>
-                        {allLessonsCompleted ? t('progress') : t('pending')}
+              {/* Scrollable container */}
+              <div className="flex overflow-x-auto gap-8 px-8 pb-8 pt-4 
+                snap-x snap-mandatory 
+                scrollbar-none 
+                scroll-smooth
+                hover:scroll-auto">
+                {events.map((event) => {
+                  const allLessonsCompleted = event.lessons.every(lessonId =>
+                    progressUser[0]?.completedLessons.includes(lessonId)
+                  );
+
+                  const isToday = new Date(event.date).toDateString() === new Date().toDateString();
+
+                  return (
+                    <div
+                      key={event.id}
+                      className="flex-none w-[380px] snap-start"
+                    >
+                      <div className={`h-full p-6 rounded-2xl border transition-all duration-300
+                        ${isToday ? 'border-blue-200 dark:border-blue-800' : 'border-gray-100 dark:border-gray-700/50'}
+                        bg-white dark:bg-gray-800/50 backdrop-blur-lg
+                        group hover:border-blue-200 dark:hover:border-blue-500/50
+                        hover:shadow-lg hover:scale-[1.02]
+                        ${allLessonsCompleted ? 'hover:border-green-200 dark:hover:border-green-500/50' : ''}
+                      `}>
+                        <div className="flex flex-col space-y-4">
+                          {isToday && (
+                            <div className="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 
+                              text-xs font-semibold text-blue-600 dark:text-blue-400 w-fit">
+                              {t('today')}
+                            </div>
+                          )}
+                          <h3 className={`text-base font-medium text-gray-800 dark:text-white 
+                            ${allLessonsCompleted ? 'group-hover:text-green-600 dark:group-hover:text-green-400' : 'group-hover:text-blue-600 dark:group-hover:text-blue-400'} 
+                            transition-colors leading-relaxed`}
+                          >
+                            {eventsDataShow[events.indexOf(event)]?.map((lesson) => {
+                              const lessonIndex = lessonByCourse.findIndex(l => l._id === lesson._id);
+                              return `${t('lesson')} ${lessonIndex + 1}: ${lesson?.nameLesson}`;
+                            }).join('\n \n')}
+                          </h3>
+                          <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-700/50">
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              {t('time')}: {event.time}
+                            </span>
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              {new Date(event.date).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div className={`text-sm font-bold ${allLessonsCompleted ? 'text-green-600 dark:text-green-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                            {allLessonsCompleted ? t('progress') : t('pending')}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </>
         )}

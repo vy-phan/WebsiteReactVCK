@@ -154,74 +154,7 @@ const ReactDice = ({ isDarkMode }) => {
     // const elapsed = Date.now() - startTime; // startTime is not defined here, it's in rollDice function
     // const progress = Math.min(elapsed / duration, 1); // duration is not defined here, it's in rollDice function
   };
-  // Thay đổi màu sắc để không trùng nhau
-  // const topics = [ // REMOVE this re-declaration of topics, it was causing issues
-  //   {
-  //     name: 'Hooks',
-  //     color: '#61dafb',
-  //     tips: [
-  //       "useEffect() có thể trả về một hàm cleanup để xóa các event listeners hoặc subscriptions.",
-  //       "React.memo() giúp tránh việc render lại component khi props không thay đổi.",
-  //       "useMemo() và useCallback() giúp tối ưu hóa hiệu suất bằng cách lưu kết quả tính toán.",
-  //       "useRef() không chỉ dùng để truy cập DOM mà còn để lưu các giá trị không gây render lại.",
-  //       "useState() có thể nhận vào một callback function để khởi tạo state phức tạp."
-  //     ]
-  //   },
-  //   {
-  //     name: 'Components',
-  //     color: '#ff6b6b',
-  //     tips: [
-  //       "Pure Components tự động thực hiện shallow comparison trên props và state.",
-  //       "Higher-Order Components (HOC) là pattern để tái sử dụng logic giữa các components.",
-  //       "Error Boundaries giúp bắt lỗi và hiển thị fallback UI thay vì làm crash ứng dụng.",
-  //       "React.lazy() và Suspense giúp load components theo demand để giảm kích thước bundle.",
-  //       "Render props là kỹ thuật chia sẻ code giữa các React components bằng một prop là function."
-  //   },
-  //   {
-  //     name: 'JSX',
-  //     color: '#f0db4f',
-  //     tips: [
-  //       "JSX cho phép bạn viết biểu thức JavaScript trong dấu ngoặc nhọn {}.",
-  //       "React Fragment (<></>) giúp trả về nhiều phần tử mà không cần thêm DOM node.",
-  //       "Các thuộc tính HTML trong JSX được viết theo camelCase (ví dụ: onClick thay vì onclick).",
-  //       "className được sử dụng thay vì class trong JSX để định style CSS.",
-  //       "Bạn có thể sử dụng toán tử && để render có điều kiện trong JSX."
-  //     ]
-  //   },
-  //   {
-  //     name: 'Redux',
-  //     color: '#764abc',
-  //     tips: [
-  //       "Redux Toolkit giúp giảm boilerplate code khi làm việc với Redux.",
-  //       "Selectors giúp truy xuất và tính toán dữ liệu từ Redux store hiệu quả.",
-  //       "Redux Middleware như redux-thunk hoặc redux-saga xử lý side effects trong Redux.",
-  //       "Redux DevTools cho phép debug state và action flows trong ứng dụng.",
-  //       "createSlice() trong Redux Toolkit tự động tạo actions và reducers."
-  //     ]
-  //   },
-  //   {
-  //     name: 'Router',
-  //     color: '#ca4245',
-  //     tips: [
-  //       "useParams() hook trong React Router giúp truy cập các route parameters.",
-  //       "React Router v6 sử dụng element prop thay vì component và render props.",
-  //       "Outlet component cho phép render các nested routes trong React Router.",
-  //       "useNavigate() hook thay thế history.push() để điều hướng lập trình.",
-  //       "React Router hỗ trợ cả client-side routing và server-side routing."
-  //     ]
-  //   },
-  //   {
-  //     name: 'Context',
-  //     color: '#20C997',
-  //     tips: [
-  //       "Context API giúp truyền dữ liệu qua component tree mà không cần prop drilling.",
-  //       "useContext() hook giúp sử dụng Context API dễ dàng hơn trong functional components.",
-  //       "createContext() có thể nhận giá trị mặc định cho context.",
-  //       "Context.Provider bao bọc components cần truy cập context value.",
-  //       "Multiple contexts có thể được sử dụng cùng lúc trong một component."
-  //     ]
-  //   }
-  // ];
+ 
   const rollDice = () => {
     if (rolling) return;
 
@@ -326,7 +259,7 @@ const ReactDice = ({ isDarkMode }) => {
   const sizeString = size + 'px';
   const boderSizeString = boderSize + 'px';
   return (
-    <div className={`flex flex-col items-center justify-center h-full p-4 bg-gray-200 dark:bg-gray-800 rounded-lg transition-colors duration-200`}>
+    <div className={`flex flex-col items-center justify-center h-full p-4 bg-gray-100 dark:bg-gray-800 rounded-lg transition-colors duration-200`}>
       <div
         className="relative w-64 h-64 flex items-center justify-center cursor-pointer mb-4"
         onClick={rollDice}
