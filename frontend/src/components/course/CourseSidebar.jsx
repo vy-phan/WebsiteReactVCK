@@ -109,28 +109,28 @@ const CourseSidebar = ({
                   {filterProgress?.some(item =>
                     item.completedLessons.includes(lesson._id)
                   ) && (
-                    <div className="float-right flex items-center justify-center">
-                      <div className="relative">
-                        <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center animate-scale-check">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="3"
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
+                      <div className="float-right flex items-center justify-center">
+                        <div className="relative">
+                          <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center animate-scale-check">
+                            <svg
+                              className="w-3 h-3 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="3"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          </div>
+                          {/* Hiệu ứng ripple */}
+                          <div className="absolute -inset-1 bg-green-500/20 rounded-full animate-ping-slow"></div>
                         </div>
-                        {/* Hiệu ứng ripple */}
-                        <div className="absolute -inset-1 bg-green-500/20 rounded-full animate-ping-slow"></div>
                       </div>
-                    </div>
-                  )}
+                    )}
                   <div className="py-1 flex items-center justify-content-center">
                     <LuTvMinimalPlay />
                     <span className="pl-2 font-normal">
@@ -151,7 +151,7 @@ const CourseSidebar = ({
             {openTests ? <FaChevronUp /> : <FaChevronDown />}
           </div>
           <div className={`px-4 pb-4 ${openTests ? "block" : "hidden"}`}>
-              <TestLastCourse filteredLessons={filteredLessons}/>
+            <TestLastCourse filteredLessons={filteredLessons} />
           </div>
         </div>
       </div>
@@ -187,42 +187,42 @@ const CourseSidebar = ({
                     {filterProgress?.some(item =>
                       item.completedLessons.includes(lesson._id)
                     ) && (
-                      <div className="float-right flex items-center justify-center">
-                        <div className="relative">
-                          <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center animate-scale-check">
-                            <svg
-                              className="w-3 h-3 text-white"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="3"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
+                        <div className="float-right flex items-center justify-center">
+                          <div className="relative">
+                            <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center animate-scale-check">
+                              <svg
+                                className="w-3 h-3 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="3"
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            </div>
+                            {/* Hiệu ứng ripple */}
+                            <div className="absolute -inset-1 bg-green-500/20 rounded-full animate-ping-slow"></div>
                           </div>
-                          {/* Hiệu ứng ripple */}
-                          <div className="absolute -inset-1 bg-green-500/20 rounded-full animate-ping-slow"></div>
                         </div>
-                      </div>
-                    )}
-                    
+                      )}
+
                     <div className="py-1 flex items-center justify-content-center">
                       <LuTvMinimalPlay />
                       <span className="pl-2 font-normal">
                         {lesson.timeVideo}
                       </span>
                     </div>
-                   
+
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          {/* <div>
+          <div>
             <div
               className="flex items-center justify-between p-4 cursor-pointer"
               onClick={toggleTests}
@@ -231,9 +231,9 @@ const CourseSidebar = ({
               {openTests ? <FaChevronUp /> : <FaChevronDown />}
             </div>
             <div className={`px-4 pb-4 ${openTests ? "block" : "hidden"}`}>
-              <p>{t('courseSidebarTestContent')}</p>
+              <TestLastCourse filteredLessons={filteredLessons} />
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
 

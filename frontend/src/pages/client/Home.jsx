@@ -262,6 +262,7 @@ const Home = () => {
       <Suspense fallback={<LoadingSpinner />}>
         <ScrollingCards />
       </Suspense>
+      
 
       <Suspense fallback={<LoadingSpinner />}>
         <CodePreview />

@@ -113,25 +113,23 @@ export const indexLessonDataWithLangchain = async (lesson, embeddings, pineconeI
         THÔNG TIN LIÊN QUAN TỪ HỆ THỐNG:
         ${pineconeContext}
       `;
+
   
       // Bước 3: Tạo prompt và gọi model
       const promptTemplate = PromptTemplate.fromTemplate(`
         Bạn đang xem bài học về **"React"**. Hãy trả lời câu hỏi sau dựa vào nội dung dưới đây:
         ------
-        ${currentLessonData}
+        {context}  // Sử dụng {context} - 'combinedContext' sẽ được truyền vào đây
         ------
-        Câu hỏi: ${userQuestion}
+        Câu hỏi: {question} // Sử dụng {question} - 'userQuestion' sẽ được truyền vào đây
 
-        Nếu thông tin trên không đủ, tham khảo thêm:
-        ------
-        ${pineconeContext}
-        ------
         Yêu cầu:
         - Ưu tiên thông tin từ "THÔNG TIN BÀI HỌC HIỆN TẠI".
         - Nếu không đủ thông tin, dùng dữ liệu từ hệ thống.
         - Luôn trả lời bằng tiếng Việt, có icon cảm xúc.
-        - Không đề cập đến nội dung ngoài React hay liên quan tới lập trình nếu người dùng hỏi về một nội dung nào đó gần gần liên quan tới react cứ việc trả lời nhằm cho người dùng hiểu rõ hơn , luôn kèm icon phù hợp 🚀
-      `);
+        - Không đề cập đến nội dung ngoài React hay liên quan tới lập trình nếu người dùng hỏi về một nội dung nào đó gần gần liên quan tới react cứ việc trả lời nhằm cho người dùng hiểu rõ hơn , luôn kèm icon phù hợp 🚀.
+        - Nếu người dủng hỏi câu hỏi liên quan tới việc tạo câu hỏi hoặc Bài Tập Ôn Tập . Thì bạn sẽ tạo ra câu hỏi và các câu trả lời dạng trắc nghiệm ABCD và mỗi lần ghi ra mỗi câu hỏi , mỗi câu trả lời ABCD hãy xuống dòng mỗi lần  . Vui lòng chỉ tạo ra câu hỏi và không cho đáp án . Khi nào người dùng cần đáp án và hỏi mới cần trả lời đáp án cụ thể . Lưu ý  tối đa là 3 câu hỏi mỗi lần và có đánh số cho mỗi câu hỏi .
+    `);
   
       const chain = RunnableSequence.from([
         { context: () => combinedContext, question: (input) => input.question },
@@ -148,103 +146,4 @@ export const indexLessonDataWithLangchain = async (lesson, embeddings, pineconeI
   };
 
 
-  // export const handleUserMessage = async (userQuestion, vectorStore, embeddings, model) => { 
-  //   if (!userQuestion?.trim()) {
-  //     throw new Error("Câu hỏi không được để trống.");
-  //   }
   
-  //   try {
-  //     if (!vectorStore) {
-  //       throw new Error("Vector store chưa được khởi tạo.");
-  //     }
-  
-  //     // Bước 1: Tìm kiếm có lọc metadata (vd: lessonId nếu cần)
-  //     const results = await vectorStore.similaritySearch(userQuestion, 5, {
-  //       // Thêm filter nếu cần (vd: chỉ tìm trong transcript)
-  //       // filter: { sourceType: "transcript" } 
-  //     });
-  
-  //     // Bước 2: Giới hạn độ dài context để tránh vượt token limit
-  //     const MAX_CONTEXT_TOKENS = 3000; // Tùy model (vd: GPT-3.5 ~ 4096 tokens)
-  //     let contextText = "";
-  //     for (const doc of results) {
-  //       const docContent = `[Nguồn: ${doc.metadata.sourceType}]\n${doc.pageContent}\n---\n`;
-  //       if ((contextText + docContent).length > MAX_CONTEXT_TOKENS) break;
-  //       contextText += docContent;
-  //     }
-  
-  //     // Bước 3: Tối ưu prompt để giảm hallucination
-  //     const promptTemplate = PromptTemplate.fromTemplate(`
-  //       Bạn là một chuyên gia React.js. HÃY TRẢ LỜI DỰA TRÊN CONTEXT SAU, KHÔNG TỰ BỊA ĐÁP ÁN:
-  //       ------
-  //       {context}
-  //       ------
-  //       Câu hỏi: {question}
-  
-  //       Yêu cầu:
-  //       - Trả lời ngắn gọn và thể hiện sự lịch sự thân thiện bằng cách có icon vui vẻvẻ, tập trung vào technical details.
-  //       - Nếu không đủ thông tin trong context, nói "Tôi chưa học về điều này".
-  //       - KHÔNG đề cập đến bất kỳ nội dung khác nào khác ngoài React hay liên quan tới việc lập trình.
-  //       - Dùng tiếng Việt và format markdown nếu cần.
-        
-  //     `);
-  
-  //     // Bước 4: Tạo chain với streaming (nếu cần)
-  //     const chain = RunnableSequence.from([
-  //       { context: () => contextText, question: (input) => input.question },
-  //       promptTemplate,
-  //       model,
-  //       new StringOutputParser(),
-  //     ]);
-  
-  //     const llmResponse = await chain.invoke({ question: userQuestion });
-  //     return llmResponse;
-  
-  //   } catch (error) {
-  //     console.error("[RAG Error]:", error);
-  //     throw new Error(`Xử lý thất bại: ${error.message}`); 
-  //   }
-  // };  
-
-// export const handleUserMessage = async (userQuestion, vectorStore, embeddings, model) => { 
-//     if (!userQuestion) {
-//         throw new Error("Câu hỏi không được để trống.");
-//     }
-
-//     try {
-//         if (!vectorStore) {
-//             throw new Error("Vector store chưa được khởi tạo.");
-//         }
-
-//         const queryEmbedding = await embeddings.embedQuery(userQuestion); // Không cần thay đổi tham số embeddings
-//         const results = await vectorStore.similaritySearch(userQuestion, 3);
-//         const contextText = results.map(r => r.pageContent).join("\n");
-
-//         const promptTemplate = PromptTemplate.fromTemplate(`
-//             Bạn là một chatbot chuyên gia về React.js. Dựa vào thông tin bài học liên quan sau đây:
-//             {context}
-
-//             Để trả lời câu hỏi của người dùng: "{question}".
-//             Chỉ trả lời các câu hỏi liên quan đến lập trình và React.js. Nếu câu hỏi không liên quan, từ chối trả lời người dùng và yêu cầu họ chỉ trả lời liên quan tới lập trình và react.
-//         `);
-
-//         const chain = RunnableSequence.from([
-//             {
-//                 context: () => contextText,
-//                 question: (input) => input.question,
-//             },
-//             promptTemplate,
-//             model,
-//             new StringOutputParser(),
-//         ]);
-
-//         const llmResponse = await chain.invoke({
-//             question: userQuestion,
-//         });
-
-//         return llmResponse;
-//     } catch (error) {
-//         console.error("Lỗi xử lý tin nhắn trong controller: ", error);
-//         throw error; // Ném lỗi để router có thể xử lý và trả về response lỗi
-//     }
-// };

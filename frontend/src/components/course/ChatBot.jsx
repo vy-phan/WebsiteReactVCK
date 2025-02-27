@@ -20,6 +20,11 @@ const ChatBot = () => {
     return chatHistory.length === 0;
   });
   const chatAreaRef = useRef(null);
+  const [keywords, setKeywords] = useState([
+    "Tóm tắt nội dung bài học",
+    "Bài Tập Ôn Tập",
+  ]);
+
 
   const apiKey = import.meta.env.VITE_GEMNI_API_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -40,6 +45,7 @@ const ChatBot = () => {
     if (lessonData) {
       const lesson = JSON.parse(lessonData);
       setCurrentLesson(lesson);
+      // console.log("Đã tải currentLesson từ localStorage:", lesson);
     }
   }, []);
 
@@ -61,68 +67,6 @@ const ChatBot = () => {
   const handleUserInput = (e) => {
     setUserInput(e.target.value);
   };
-
-  // const sendMessage = async () => {
-  //   if (!userInput.trim()) return;
-  //   if (showIntroMessage) {
-  //     setShowIntroMessage(false);
-  //   }
-
-  //   const loadingMessage = {
-  //     role: "assistant",
-  //     text: (
-  //       <ThreeDots
-  //         height={30}
-  //         width={60}
-  //         color="#718096"
-  //         secondaryColor="#A0AEC0"
-  //         wrapperClass="inline-block"
-  //       />
-  //     ),
-  //   };
-  //   setChatHistory((currentHistory) => [
-  //     ...currentHistory,
-  //     { role: "user", text: userInput },
-  //     loadingMessage,
-  //   ]);
-
-  //   try {
-  //     setLoading(true);
-  //     const prompt = `
-  //               Bạn sẽ có thông tin về nội dung khóa react và đây là mô tả chi tiết cho khóa học đó ${templateData(
-  //       currentLesson
-  //     )}
-  //               Dựa vào thông tin trên bạn sẽ trả lời câu hỏi người dùng ${userInput}
-  //               Nếu người dùng hỏi về nội dung khóa học thì bạn sẽ trả lời câu hỏi người dùng về nội dung khóa học hoặc có liên quan về react js họặc liên quan.
-  //               Lưu ý néu người dùng hỏi  về khóa học và nội dung liên quan đến lập trình , hoặc react js hiện có thì bạn sẽ từ chối trả lời người dùng và yêu cầu họ chỉ trả lời liên quan tới khóa học và react js.
-  //               `;
-  //     const result = await model.generateContent(prompt);
-  //     const response = await result.response;
-  //     // Cập nhật tin nhắn loading bằng phản hồi thực tế
-  //     setChatHistory((currentHistory) => {
-  //       const updatedHistory = [...currentHistory];
-  //       updatedHistory[updatedHistory.length - 1] = {
-  //         role: "assistant",
-  //         text: response.text(),
-  //       }; // Thay thế tin nhắn loading cuối cùng
-  //       return updatedHistory;
-  //     });
-  //   } catch (error) {
-  //     console.error("Lỗi khi gửi tin nhắn: ", error);
-  //     // Trong trường hợp lỗi, bạn có thể muốn thay thế tin nhắn loading bằng một tin nhắn lỗi
-  //     setChatHistory((currentHistory) => {
-  //       const updatedHistory = [...currentHistory];
-  //       updatedHistory[updatedHistory.length - 1] = {
-  //         role: "assistant",
-  //         text: "Xin lỗi, đã có lỗi xảy ra khi phản hồi. Vui lòng thử lại sau.",
-  //       };
-  //       return updatedHistory;
-  //     });
-  //   } finally {
-  //     setLoading(false);
-  //     setUserInput("");
-  //   }
-  // };
 
   const sendMessage = async () => {
     if (!userInput.trim()) return;
@@ -150,7 +94,6 @@ const ChatBot = () => {
 
     try {
       setLoading(true);
-      // **Bắt đầu phần code thay đổi trong sendMessage**
 
       const requestBody = {
         message: userInput,
@@ -168,7 +111,7 @@ const ChatBot = () => {
 
       if (!response.ok) {
         const errorData = await response.json(); // Lấy thông tin lỗi từ backend nếu có
-        throw new Error(`Lỗi từ server: ${response.status} - ${errorData.error || response.statusText}`);
+        throw new Error(`Lỗi server đang bận `);
       }
 
       const responseData = await response.json();
@@ -214,6 +157,11 @@ const ChatBot = () => {
     setChatHistory([]);
     setShowIntroMessage(true);
   };
+
+  const handleKeywordClick = (keyword) => {
+    setUserInput(keyword);
+  };
+
   const { t } = useTranslation();
 
   return (
@@ -310,56 +258,95 @@ const ChatBot = () => {
         ))}
       </div>
 
-      <div className="dark:bg-gray-900 border-t border-gray-200 pt-2 pb-4 mt-auto">
-        <div className="max-w-screen-xl mx-auto flex items-center gap-2 px-4">
-          <div className="flex-1">
-            <input
-              type="text"
-              className="w-full p-3 border dark:bg-gray-900 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 focus:border-blue-300 outline-none"
-              placeholder={t("chatInput")}
-              value={userInput}
-              onChange={handleUserInput}
-              onKeyDown={handleKeyDown}
-              disabled={loading}
-            />
-          </div>
-          <button
-            className={`p-3 rounded-lg ${loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              } text-white font-medium transition-colors duration-200`}
-            onClick={sendMessage}
-            disabled={loading}
-            aria-label="Send message"
-          >
-            {loading ? (
-              <Oval
-                height={20}
-                width={20}
-                color="#ffffff"
-                secondaryColor="#ffffff"
-                strokeWidth={4}
-                strokeWidthSecondary={4}
+      <div className="dark:bg-gray-900 border-t border-gray-200 dark:border-gray-950 pt-2 pb-4 mt-auto">
+        <div className="max-w-screen-xl mx-auto flex flex-col gap-2 px-4">
+          {showIntroMessage && ( // Conditional rendering for keywords
+            <div className="flex flex-nowrap overflow-x-auto gap-3 mb-3 py-2 px-1 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent">
+              {keywords.map((keyword, index) => (
+                <button
+                  key={index}
+                  className="
+                    px-6 py-3
+                    rounded-full 
+                    text-sm font-medium
+                    transition-all duration-300 
+                    shadow-lg
+                    whitespace-nowrap
+                    border-2
+                    transform hover:scale-105
+                    hover:shadow-xl
+                    dark:hover:shadow-blue-900/30
+                    bg-white
+                    text-blue-700
+                    dark:text-blue-200
+                    dark:bg-gray-700
+                    border-blue-300/50
+                    dark:border-blue-700/50
+                    hover:from-blue-200 hover:via-blue-100 hover:to-indigo-200
+                    dark:hover:from-gray-700 dark:hover:via-blue-800/40 dark:hover:to-gray-700
+                    backdrop-blur-sm
+                    hover:border-blue-400
+                    dark:hover:border-blue-600
+                    hover:text-blue-800
+                    dark:hover:text-blue-100
+                  "
+                  onClick={() => handleKeywordClick(keyword)}
+                >
+                  {keyword}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <div className="flex-1">
+              <input
+                type="text"
+                className="w-full p-3 border dark:bg-gray-900 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 focus:border-blue-300 outline-none"
+                placeholder={t("chatInput")}
+                value={userInput}
+                onChange={handleUserInput}
+                onKeyDown={handleKeyDown}
+                disabled={loading}
               />
-            ) : (
-              <FaPaperPlane className="w-5 h-5" />
-            )}
-          </button>
-          <button
-            className="p-3 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium transition-colors duration-200 ml-2"
-            onClick={() => {
-              if (
-                window.confirm(
-                  "Bạn có chắc chắn muốn xóa toàn bộ lịch sử chat?"
-                )
-              ) {
-                clearChatHistory();
-              }
-            }}
-            aria-label="Clear chat history"
-          >
-            <FaTrash className="w-5 h-5" />
-          </button>
+            </div>
+            <button
+              className={`p-3 rounded-lg ${loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+                } text-white font-medium transition-colors duration-200`}
+              onClick={sendMessage}
+              disabled={loading}
+              aria-label="Send message"
+            >
+              {loading ? (
+                <Oval
+                  height={20}
+                  width={20}
+                  color="#ffffff"
+                  secondaryColor="#ffffff"
+                  strokeWidth={4}
+                  strokeWidthSecondary={4}
+                />
+              ) : (
+                <FaPaperPlane className="w-5 h-5" />
+              )}
+            </button>
+            <button
+              className="p-3 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium transition-colors duration-200 ml-2"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Bạn có chắc chắn muốn xóa toàn bộ lịch sử chat?"
+                  )
+                ) {
+                  clearChatHistory();
+                }
+              }}
+              aria-label="Clear chat history"
+            >
+              <FaTrash className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

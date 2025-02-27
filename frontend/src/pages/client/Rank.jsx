@@ -1,4 +1,3 @@
-// --- START OF FILE Rank.jsx ---
 import React, { useMemo } from "react";
 import LeaderboardCard from "../../components/LeaderboardCard";
 import { Link } from "react-router-dom";
@@ -67,25 +66,49 @@ const Rank = () => {
 
   const loading = progressLoading || usersLoading;
 
-  // console.log(" Rank Bang Xếp Hạng User : ", topUsers);
-
   return (
-    <div className={`min-h-screen py-8 ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'}`}>
+    <div className={`min-h-screen py-8 relative overflow-hidden ${isDarkMode ? 'bg-slate-950' : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'}`}>
+      {/* Decorative lines for dark mode - similar to Google AI Forum */}
+      {isDarkMode && (
+        <>
+          {/* Left curved line - Blue */}
+          <div className="absolute left-0 top-0 w-32 h-full overflow-hidden pointer-events-none">
+            <div className="absolute w-64 h-64 -left-32 top-32 border-4 border-blue-500 rounded-full opacity-30"></div>
+            <div className="absolute w-96 h-96 -left-48 top-16 border-4 border-blue-400 rounded-full opacity-20"></div>
+            <div className="absolute w-32 h-32 -left-16 top-64 border-2 border-blue-600 rounded-full opacity-40"></div>
+          </div>
+          
+          {/* Right curved line - Yellow/Gold */}
+          <div className="absolute right-0 bottom-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute w-128 h-128 -right-64 -bottom-64 border-4 border-yellow-500 rounded-full opacity-20"></div>
+            <div className="absolute w-96 h-96 -right-48 bottom-32 border-4 border-amber-400 rounded-full opacity-15"></div>
+            <div className="absolute w-64 h-64 right-16 -bottom-32 border-2 border-yellow-600 rounded-full opacity-10"></div>
+          </div>
+          
+          {/* Top right curved line - Blue */}
+          <div className="absolute right-0 top-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute w-96 h-96 -right-48 -top-48 border-4 border-blue-500 rounded-full opacity-20"></div>
+            <div className="absolute w-64 h-64 right-16 -top-32 border-2 border-blue-400 rounded-full opacity-30"></div>
+          </div>
+        </>
+      )}
+
       <Meta
-        title={t('leaderboardMetaTitle')} // Sử dụng translation cho title
-        description={t('leaderboardMetaDescription')} // Sử dụng translation cho description
-        keywords={t('leaderboardMetaKeywords')} // Sử dụng translation cho keywords
+        title={t('leaderboardMetaTitle')}
+        description={t('leaderboardMetaDescription')}
+        keywords={t('leaderboardMetaKeywords')}
       />
+      
       {loading ? (
         <div className="flex justify-center items-center h-screen">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
         </div>
       ) : (
-        <div className="container mx-auto px-4 mt-12">
+        <div className="container mx-auto px-4 mt-12 relative z-10">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Bảng xếp hạng */}
             <div className="lg:w-2/3">
-              <div className={`rounded-2xl shadow-xl overflow-hidden ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+              <div className={`rounded-2xl shadow-xl overflow-hidden ${isDarkMode ? 'bg-gray-800 bg-opacity-80 backdrop-blur-sm' : 'bg-white'}`}>
                 <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-6">
                   <h1 className="text-3xl font-extrabold text-white">
                     {t('leaderboardTitle')}
@@ -113,7 +136,7 @@ const Rank = () => {
 
             {/* Phần thông tin */}
             <div className="lg:w-1/3">
-              <div className={`rounded-2xl shadow-xl p-8 ${isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}>
+              <div className={`rounded-2xl shadow-xl p-8 ${isDarkMode ? 'bg-gray-800 bg-opacity-80 backdrop-blur-sm text-gray-100' : 'bg-white text-gray-900'}`}>
                 <h2 className={`text-3xl text-center font-bold mb-6 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                   {t('reachTheTop')}
                 </h2>
@@ -147,4 +170,3 @@ const Rank = () => {
 };
 
 export default Rank;
-// --- END OF FILE Rank.jsx ---
