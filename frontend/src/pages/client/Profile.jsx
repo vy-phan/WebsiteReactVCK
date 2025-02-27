@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { FaEnvelope, FaEdit, FaUser, FaChartBar, FaCamera, FaBook, FaStar, FaFire, FaCheckCircle, FaHourglassHalf, } from "react-icons/fa";
+import { FaDice, FaLightbulb, FaEnvelope, FaEdit, FaUser, FaChartBar, FaCamera, FaBook, FaStar, FaFire, FaCheckCircle, FaHourglassHalf, } from "react-icons/fa";
 import { useAuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import AvatarModal from "../../components/AvatarModal";
@@ -13,6 +13,7 @@ import ProcessDiagram from "../../components/ProcessDiagram";
 import CertificateModal from '../../components/profile/CertificateModal';
 import ProfileSettings from "../../components/profile/ProfileSettings";
 import Meta from '../../components/Meta.jsx';
+import ReactDice from "../../components/ReactDice.jsx";
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -400,10 +401,15 @@ const Profile = () => {
     );
   };
 
+  // Sửa trong mảng tabs
   const tabs = [
     { key: "info", label: t("personal_info"), icon: <FaUser /> },
-    { key: "activity", label: t("recent_activity"), icon: <FaHourglassHalf /> }, // Đổi icon cho Activity
-    { key: "stats", label: t("stats"), icon: <FaChartBar /> }, // Thêm tab Stats
+    {
+      key: "activity",
+      label: t("react_tips_dice"), // Đổi tên tab
+      icon: <FaDice className="rotate-12" /> // Thay đổi icon và thêm hiệu ứng xoay nhẹ
+    },
+    { key: "stats", label: t("stats"), icon: <FaChartBar /> },
     { key: "settings", label: t("settings"), icon: <FaEdit /> },
   ];
 
@@ -546,14 +552,87 @@ const Profile = () => {
             )}
             {activeTab === "activity" && (
               <div>
+                {/* React Dice Section with better styling */}
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center space-x-2">
-                  <FaHourglassHalf className="text-yellow-500" />{" "}
-                  <span>{t("recent_activity")}</span>
+                  <FaDice className="text-blue-500 rotate-12" />
+                  <span>{t("react_tips_dice")}</span>
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {t("no_recent_activity")}
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                  {t("react_tips_dice_description")}
                 </p>
-                {/* Thêm nội dung activity phức tạp hơn ở đây */}
+                <div className="mt-8">
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-6">
+                    <div className="text-center mb-6">
+                      <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                        {t('Interactive React Learning Tips')}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300">
+                        {t('Roll the dice to discover React tips and tricks!')}
+                      </p>
+                    </div>
+
+                    
+                        <ReactDice />
+                     
+
+                    <div className="mt-6 text-center">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {t('Click on the dice or use the button below to roll')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Optional: Additional activity stats */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-lg">
+                        <FaDice className="text-blue-500 dark:text-blue-400 text-xl" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-800 dark:text-white">
+                          {t('Today\'s Tips')}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {t('Roll for new tips')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-purple-100 dark:bg-purple-900 p-2 rounded-lg">
+                        <FaLightbulb className="text-purple-500 dark:text-purple-400 text-xl" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-800 dark:text-white">
+                          {t('Learning Streaks')}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {t('Keep rolling daily')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-green-100 dark:bg-green-900 p-2 rounded-lg">
+                        <FaStar className="text-green-500 dark:text-green-400 text-xl" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-800 dark:text-white">
+                          {t('Tips Collection')}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {t('Discover more')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
             {activeTab === "stats" && (

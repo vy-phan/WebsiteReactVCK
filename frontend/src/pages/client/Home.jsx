@@ -14,6 +14,7 @@ import Meta from '../../components/Meta.jsx';
 const FeedBack = React.lazy(() => import('../../components/FeedBack'));
 const ScrollingCards = React.lazy(() => import('../../components/ScrollingCards'));
 const CodePreview = React.lazy(() => import('../../components/CodePreview'));
+const ReactDice = React.lazy(() => import('../../components/ReactDice'));
 
 const animations = {
   container: {
@@ -146,14 +147,14 @@ const FeatureCard = React.memo(({ isDarkMode }) => {
 
 const Home = () => {
   const { isDarkMode } = useTheme();
-  const { i18n,t } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   return (
     <div className={`min-h-screen ${isDarkMode
       ? 'bg-gradient-to-br from-gray-900 to-black text-white'
       : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-900'
       } pt-4 sm:pt-6 md:pt-8`}>
-      {/* Nhúng Meta component ở đầu trang Home */}      
+      {/* Nhúng Meta component ở đầu trang Home */}
       <Meta
         title={t('homeMetaTitle')} // Sử dụng translation cho title
         description={t('homeMetaDescription')} // Sử dụng translation cho description
@@ -258,15 +259,20 @@ const Home = () => {
         </motion.div>
       </div>
 
+      
+
 
       <Suspense fallback={<LoadingSpinner />}>
         <ScrollingCards />
       </Suspense>
-      
+
+     
+
 
       <Suspense fallback={<LoadingSpinner />}>
         <CodePreview />
       </Suspense>
+
 
       <Suspense fallback={<LoadingSpinner />}>
         <FeedBack />
