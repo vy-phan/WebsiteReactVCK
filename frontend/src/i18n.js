@@ -113,7 +113,18 @@ const resources = {
       "female": "Female",
       "username": "Username",
       "gender": "Gender",
-      "email": "Email"
+      "email": "Email",
+      "react_tips_dice": "React Tips Dice",
+      "react_tips_dice_description": "Roll the dice to learn React tips and tricks!",
+
+
+      "dice": {
+        "roll": "Roll Dice",
+        "rolling": "Rolling...",
+        "interesting_tip": "Interesting Tip"
+      },
+      
+
 
     }
 
@@ -222,7 +233,36 @@ const resources = {
       "save_changes": "Lưu thay đổi",
       "change_password": "Đổi mật khẩu",
       "select_gender": "Chọn giới tính",
-      "email_cannot_be_changed": "Email không thể thay đổi"
+      "email_cannot_be_changed": "Email không thể thay đổi",
+      "Interactive React Learning Tips": "Mẹo Học React Tương Tác",
+      "Roll the dice to discover React tips and tricks!": "Tung xúc xắc để khám phá các mẹo và thủ thuật React!",
+      "Click on the dice or use the button below to roll": "Nhấp vào xúc xắc hoặc sử dụng nút bên dưới để tung",
+      "Today's Tips": "Mẹo Hôm Nay",
+      "Roll for new tips": "Tung để nhận mẹo mới",
+      "Learning Streaks": "Chuỗi Học Tập",
+      "Keep rolling daily": "Tiếp tục tung hàng ngày",
+      "Tips Collection": "Bộ Sưu Tập Mẹo",
+      "Discover more": "Khám phá thêm",
+      "react_tips_dice": "Xúc Xắc Mẹo React",
+      "react_tips_dice_description": "Tung xúc xắc để khám phá các mẹo và kỹ thuật React thú vị!",
+      "Interactive React Learning Tips": "Mẹo Học React Tương Tác",
+      "Roll the dice to discover React tips and tricks!": "Tung xúc xắc để khám phá các mẹo và thủ thuật React!",
+      "Click on the dice or use the button below to roll": "Nhấp vào xúc xắc hoặc sử dụng nút bên dưới để tung",
+      "Today's Tips": "Mẹo Hôm Nay",
+      "Roll for new tips": "Tung để nhận mẹo mới",
+      "Learning Streaks": "Chuỗi Học Tập",
+      "Keep rolling daily": "Tiếp tục tung hàng ngày",
+      "Tips Collection": "Bộ Sưu Tập Mẹo",
+      "Discover more": "Khám phá thêm",
+      "Tips History": "Lịch Sử Mẹo",
+      "View your learning journey": "Xem hành trình học tập của bạn",
+      "dice": {
+        "roll": "Tung Xúc Xắc",
+        "rolling": "Đang Tung...",
+        "interesting_tip": "Mẹo thú vị"
+      }
+
+      
     }
 
   }
