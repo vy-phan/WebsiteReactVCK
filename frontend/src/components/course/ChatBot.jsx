@@ -22,7 +22,7 @@ const ChatBot = () => {
   const chatAreaRef = useRef(null);
   const [keywords, setKeywords] = useState([
     "Tóm tắt nội dung bài học",
-    "Bài Tập Ôn Tập",
+    "Tạo Bài Tập Ôn Tập",
   ]);
 
 
