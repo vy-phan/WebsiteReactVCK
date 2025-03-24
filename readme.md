@@ -149,7 +149,7 @@ Website được xây dựng với trọng tâm là trải nghiệm người dù
     - GitHub: [github.com/CuongAFK](https://github.com/CuongAFK)
 
 3. **Dương Trạch Đông** - Developer
-    - GitHub: [github.com/CuongAFK](https://github.com/DongDuong2005)
+    - GitHub: [github.com/DongDuong2005](https://github.com/DongDuong2005)
 
 ## 📌 Liên hệ & Tham khảo dự án  
 🔗 **Demo**: [reactvck.onrender.com](https://reactvck.onrender.com/)
